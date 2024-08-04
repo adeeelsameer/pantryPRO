@@ -1,16 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import Typical from 'react-typical';
+import Typed from 'typed.js';
 import { Lateef } from 'next/font/google';
 
 const lateef = Lateef({
   subsets: ['latin'],
   weight: ['400', '700']
-})
+});
 
 export default function MainPage() {
+  const typedElement = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      strings: [
+        'P', 'Pa', 'Pan', 'Pant', 'Pantr', 'Pantry', 'PantryP', 'PantryPR', 'PantryPRO'
+      ],
+      typeSpeed: 0.2,  // Increase typing speed (smaller value = faster)
+      backSpeed: 0.2,  // Increase backspacing speed
+      startDelay: 0, // Short delay before typing starts
+      backDelay: 500,  // Short delay before backspacing
+      loop: true,
+      loopCount: Infinity
+    };
+
+    const typed = new Typed(typedElement.current, options);
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
 
   return (
     <>
@@ -22,33 +43,17 @@ export default function MainPage() {
         justifyContent="center"
         alignItems="center"
         bgcolor="#1A4D2E"
-
       >
-
         <Typography
           color="#E8DFCA"
           variant="h1"
           sx={{ fontFamily: 'Roboto', fontWeight: 700 }}
           textAlign={'center'}
         >
-          WELCOME to{' '} <br />
-          <Typical
-            steps={[
-              'P', 280,
-              'Pa', 280,
-              'Pan', 280,
-              'Pant', 280,
-              'Pantr', 280,
-              'Pantry', 280,
-              'PantryP', 200,
-              'PantryPR', 200,
-              'PantryPRO', 3000
-            ]}
-            loop={Infinity}
-            wrapper="span"
-          />
+          WELCOME to{' '}
+          <br />
+          <span ref={typedElement}></span>
         </Typography>
-
 
         <Typography color="#E8DFCA" variant="h5" mt={2}>
           Your very own pantry customization website where you can track all your items.
@@ -69,7 +74,6 @@ export default function MainPage() {
         }}>
           Begin your Journey
         </Button>
-
       </Box>
     </>
   );
