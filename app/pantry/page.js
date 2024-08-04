@@ -113,7 +113,7 @@ export default function Pantry() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
   const checkRepeat = (n) => {
     for (const item of items) {

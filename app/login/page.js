@@ -157,7 +157,7 @@ export default function Login() {
                 )}
 
                 <Typography color="#1A4D2E" mt="10px">
-                    Don't have an account?&nbsp;
+                    Don&apos;t have an account?&nbsp;
                     <Link href="/create-account" passHref>
                         Create one
                     </Link>
